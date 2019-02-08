@@ -1,3 +1,10 @@
+version 0.2.0
+--------------
+* FIXED   typos due to files and classes renamings
+* CHANGED reorganized the files
+* CHANGED reorganized renamed some classes
+* CHANGED added informations in the README
+
 version 0.1.0
 --------------
 * ADDED initial contents
