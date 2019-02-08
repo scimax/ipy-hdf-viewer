@@ -9,36 +9,36 @@ import matplotlib.pyplot as plt
 
 import ipywidgets as widgets
 
-from .MplDataViewer import MplDataViewer, MplDataViewerError
+from hdfviewer.viewers.MplDataViewer import MplDataViewer, MplDataViewerError
 
-from .MplOutputWidget import MplOutputWidget
+from hdfviewer.widgets.MplOutput import MplOutput
 
-class HDF5Parser(widgets.Accordion):
+class HDFViewer(widgets.Accordion):
 
-    def __init__(self, hdf5, startPath=None):
+    def __init__(self, hdf, startPath=None):
         
         widgets.Accordion.__init__(self)
             
-        self._hdf5 = hdf5
+        self._hdf = hdf
                 
         if startPath is None:
             self._startPath = "/"
-            self.children = [HDF5Parser(hdf5,self._startPath)]
+            self.children = [HDFViewer(hdf,self._startPath)]
             self.set_title(0,self._startPath)
         else:
             self._startPath = startPath
                         
             attributesAccordion = widgets.Accordion()
-            for idx,(key,value) in enumerate(self._hdf5[self._startPath].attrs.items()):
+            for idx,(key,value) in enumerate(self._hdf[self._startPath].attrs.items()):
                 attributesAccordion.children = list(attributesAccordion.children) + [widgets.HTML(value)]
                 attributesAccordion.set_title(idx,key) 
                              
             # Setup the groups and datasets accordion
             groupsAccordion = widgets.Accordion()
             datasetsAccordion = widgets.Accordion()
-            for value in list(self._hdf5[self._startPath].values()):                
+            for value in list(self._hdf[self._startPath].values()):                
                 if isinstance(value,h5py.Group):
-                    groupsAccordion.children = list(groupsAccordion.children) + [HDF5Parser(hdf5,value.name)]
+                    groupsAccordion.children = list(groupsAccordion.children) + [HDFViewer(hdf,value.name)]
                     groupsAccordion.set_title(len(groupsAccordion.children)-1,value.name)
                 elif isinstance(value,h5py.Dataset):
                     datasetInfo = []
@@ -49,7 +49,7 @@ class HDF5Parser(widgets.Accordion):
                     datasetInfo.append("<i>Type: %s</i>" % value.dtype.name)
                     datasetInfo = "<br>".join(datasetInfo)
                     vbox = widgets.VBox()
-                    vbox.children = [widgets.HTML(datasetInfo),MplOutputWidget()]
+                    vbox.children = [widgets.HTML(datasetInfo),MplOutput()]
                     datasetsAccordion.children = list(datasetsAccordion.children) + [vbox]
                     datasetsAccordion.set_title(len(datasetsAccordion.children)-1,value.name) 
                     datasetsAccordion.observe(self._onSelectDataset,names="selected_index")
@@ -85,14 +85,13 @@ class HDF5Parser(widgets.Accordion):
         
         with output:
             try:
-                a = np.random.uniform(0,1,(300,400,50))
-                self._viewer = MplDataViewer(a,standAlone=False)
+                self._viewer = MplDataViewer(self._hdf[path],standAlone=False)
             except MplDataViewerError as e:
                 label = widgets.Label(value=str(e))
                 display(label)                
             else:
                 # Bind the DataViewer figure to the MplOutput widget for allowing a "clean" output clearing (i.e. release the figure from plt)
-                output.figure = self._viewer.figure
+                output.figure = self._viewer.viewer.figure
 
         hbox = widgets.HBox()
 

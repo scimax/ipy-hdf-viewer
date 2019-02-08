@@ -14,7 +14,7 @@ import matplotlib.pyplot as plt
 
 class _MplDataViewer1D(object):
     
-    def __init__(self,dataset):
+    def __init__(self,dataset,**kwargs):
                             
         self._figure = plt.figure()
 
