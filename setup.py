@@ -22,7 +22,7 @@ def find_packages(path, base=None, exclude=None):
 
     return packages
 
-packages = find_packages(path="src",base="hdf5viewer")
+packages = find_packages(path="src",base="hdfviewer")
 
 setup(name             = "hdf5viewer",
       version          = pkginfo["__version__"],
@@ -35,5 +35,5 @@ setup(name             = "hdf5viewer",
       url              = pkginfo["__url__"],
       license          = pkginfo["__license__"],
       packages         = packages,
-      package_dir      = {"hdf5viewer" : "src"},
+      package_dir      = {"hdfviewer" : "src"},
       platforms        = ['Unix','Windows'])
