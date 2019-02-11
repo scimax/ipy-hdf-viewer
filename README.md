@@ -25,8 +25,20 @@ In case of **2D** and **3D** datasets, the matrix view is made of a 2D image of 
     - go the +n (n can be > 9) frame by pressing *n* number followed by the **down** or the **right** keys 
     - go the -n (n can be > 9) frame by pressing *n* number followed by the **up** or the **left** keys 
 
+Prerequesites
+=============
+- python3 + pip
+
 Installation
 =============
+- `pip3 install --upgrade pip`
+- `pip3 install numpy`
+- `pip3 install matplotlib`
+- `pip3 install jupyter-lab`
+- `pip3 install ipywidgets`
+- `pip3 install ipympl`
+
+
 - `cd` to the directory where lies the `setup.py` file
 - `python3 setup build`
 - `python3 setup install`
