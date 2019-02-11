@@ -1,10 +1,14 @@
+version 0.3.2
+--------------
+* CHANGED added informations in the **README** file
+
 version 0.3.1
 --------------
 * FIXED typos in the **README** file
 
 version 0.3.0
 --------------
-* CHANGED added informations in the **README**
+* CHANGED added informations in the **README** file
 * CHANGED added contents to **CONTRIBUTING** file
 
 version 0.2.0
