@@ -31,13 +31,18 @@ Prerequesites
 
 Installation
 =============
+see [here](https://github.com/jupyter-widgets/ipywidgets/tree/master/packages/jupyterlab-manager) for info
 - `pip3 install --upgrade pip`
 - `pip3 install numpy`
 - `pip3 install h5py`
 - `pip3 install matplotlib`
-- `pip3 install jupyterlab`
 - `pip3 install ipywidgets`
 - `pip3 install ipympl`
+- `pip3 install jupyterlab`
+
+
+- `jupyter labextension install @jupyter-widgets/jupyterlab-manager`
+- `jupyter labextension install jupyter-matplotlib`
 
 
 - `cd` to the directory where lies the `setup.py` file
