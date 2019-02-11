@@ -33,15 +33,16 @@ Installation
 =============
 - `pip3 install --upgrade pip`
 - `pip3 install numpy`
+- `pip3 install h5py`
 - `pip3 install matplotlib`
-- `pip3 install jupyter-lab`
+- `pip3 install jupyterlab`
 - `pip3 install ipywidgets`
 - `pip3 install ipympl`
 
 
 - `cd` to the directory where lies the `setup.py` file
-- `python3 setup build`
-- `python3 setup install`
+- `python3 setup.py build`
+- `python3 setup.py install`
 
 Usage in a notebook
 ===================
