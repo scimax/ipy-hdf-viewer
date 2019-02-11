@@ -1,10 +1,12 @@
 import os
 
-from distutils.core import setup
+try:
+    from setuptools import setup, find_packages
+except ImportError:
+    from distutils.core import setup, find_packages
 
 pkginfo = {}
 exec(open("src/__pkginfo__.py","r").read(),{},pkginfo)
-
 
 def is_package(path):
     return (os.path.isdir(path) and os.path.isfile(os.path.join(path, '__init__.py')))
@@ -24,7 +26,7 @@ def find_packages(path, base=None, exclude=None):
 
 packages = find_packages(path="src",base="hdfviewer")
 
-setup(name             = "hdf5viewer",
+setup(name             = "hdfviewer",
       version          = pkginfo["__version__"],
       description      = pkginfo["__description__"],
       long_description = pkginfo["__long_description__"],
@@ -36,4 +38,6 @@ setup(name             = "hdf5viewer",
       license          = pkginfo["__license__"],
       packages         = packages,
       package_dir      = {"hdfviewer" : "src"},
-      platforms        = ['Unix','Windows'])
+      platforms        = ['Unix','Windows'],
+      install_requires = ["numpy","matplotlib","h5py","jupyterlab","ipywidgets","ipympl"]
+)
