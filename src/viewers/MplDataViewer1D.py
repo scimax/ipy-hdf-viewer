@@ -1,14 +1,9 @@
-#!/usr/bin/env python
-
 """
 MatPlotLib based viewer for 1D NumPy data.
 
 """
 
 import numpy as np
-
-import warnings
-warnings.filterwarnings("ignore")
 
 import matplotlib.pyplot as plt
 

@@ -4,6 +4,9 @@ MatPlotLib based viewer for 1D, 2D and 3D NumPy data.
 
 import numpy as np
 
+import warnings
+warnings.filterwarnings("ignore")
+
 from hdfviewer.viewers.MplDataViewer1D import _MplDataViewer1D
 from hdfviewer.viewers.MplDataViewer2D import _MplDataViewer2D
 from hdfviewer.viewers.MplDataViewer3D import _MplDataViewer3D

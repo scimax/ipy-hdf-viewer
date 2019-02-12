@@ -2,8 +2,8 @@
 Code taken and slightly modified from https://stackoverflow.com/questions/48056345/jupyter-lab-browsing-the-remote-file-system-inside-a-notebook
 """
 
-import sys
 import os
+
 import ipywidgets as widgets
 
 from IPython.display import display

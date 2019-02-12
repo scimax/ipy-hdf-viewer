@@ -1,30 +1,9 @@
-#!/usr/bin/env python
-
 """
 MatPlotLib based viewer for 2D NumPy data.
 
 """
 
-__author__ = "Eric Pellegrini"
-
-__credits__ = []
-
-__copyright__ = "Copyright 2019, Institut Laue Langevin"
-
-__license__ = "MIT"
-
-__version__ = "0.0.0"
-
-__maintainer__ = "Eric Pellegrini"
-
-__email__ = "pellegrini@ill.fr"
-
-__status__ = "Prototype"
-
 import numpy as np
-
-import warnings
-warnings.filterwarnings("ignore")
 
 import matplotlib.gridspec as gridspec
 import matplotlib.pyplot as plt
