@@ -31,7 +31,7 @@ Prerequesites
 
 Installation
 =============
-see [here](https://github.com/jupyter-widgets/ipywidgets/tree/master/packages/jupyterlab-manager) for info
+see [here](https://github.com/jupyter-widgets/ipywidgets/tree/master/packages/jupyterlab-manager) for complementary info
 - `pip3 install --upgrade pip`
 - `pip3 install numpy`
 - `pip3 install h5py`
@@ -51,18 +51,20 @@ see [here](https://github.com/jupyter-widgets/ipywidgets/tree/master/packages/ju
 
 Usage in a notebook
 ===================
-`%matplotlib ipympl`
+```
+%matplotlib ipympl
 
-`import h5py`
-`from hdfviewer.widgets.HDFViewer import HDFViewer`
-`from hdfviewer.widgets.PathSelector import PathSelector`
+import h5py
+from hdfviewer.widgets.HDFViewer import HDFViewer
+from hdfviewer.widgets.PathSelector import PathSelector
 
-`path = PathSelector(extensions=[".hdf",".h5",".nxs"])`
-`path.widget`
+path = PathSelector(extensions=[".hdf",".h5",".nxs"])
+path.widget
 
-`if path.file:`
-&emsp;&emsp;`hdf5 = h5py.File(path.file,"r")`
-&emsp;&emsp;`   display(HDFViewer(hdf5))`
+if path.file:
+    hdf5 = h5py.File(path.file,"r")
+    display(HDFViewer(hdf5))
+```
 
 
 
