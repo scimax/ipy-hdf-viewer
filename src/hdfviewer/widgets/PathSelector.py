@@ -1,5 +1,5 @@
 """
-Code taken and slightly modified from https://stackoverflow.com/questions/48056345/jupyter-lab-browsing-the-remote-file-system-inside-a-notebook
+Adpated from `the following code base <https://stackoverflow.com/questions/48056345/jupyter-lab-browsing-the-remote-file-system-inside-a-notebook>`_
 """
 
 import os
@@ -9,37 +9,74 @@ import ipywidgets as widgets
 from IPython.display import display
 
 class PathSelector(object):
+    """This class allows to create a file browser in the context of **Jupyter Lab**
 
-    def __init__(self,start_dir=None,select_file=True,extensions=None):        
-        self.file        = None 
-        self.select_file = select_file
-        self.cwd         = start_dir if start_dir else os.environ["HOME"]
-        self.select      = widgets.SelectMultiple(options=['init'],value=(),rows=10,description='') 
-        self.widget      = widgets.Accordion(children=[self.select])        
-        self.extensions = extensions if extensions else []
+    :param start_dir: the starting directory for the file browser. If not set, the current working directory will be used.
+    :type start_dir: str or None
 
-        self.widget.selected_index = None # Start closed (showing path only)
-        self.refresh(self.cwd)
-        self.select.observe(self.on_update,'value')
+    :param selectFile: if True the browser is used to select files otherwise it is used as to browse directories.
+    :type selectFile: bool
 
-    def on_update(self,change):
+    :param extensions: if set, only those files matching the defined extensions will be displayed otherwise all files are displayed.
+    :type extensions: list[int]
+    """
+
+    def __init__(self,startDir=None,selectFile=True,extensions=None):        
+        self._file        = None 
+        self._selectFile = selectFile
+        self._cwd         = startDir if startDir else os.environ["HOME"]
+        self._select      = widgets.SelectMultiple(options=['init'],value=(),rows=10,description='') 
+        self._widget      = widgets.Accordion(children=[self._select])        
+        self._extensions = extensions if extensions else []
+
+        # Start closed (showing path only)
+        self._widget.selected_index = None
+        self.update(self._cwd)
+        self.select.observe(self._onUpdate,'value')
+
+    @property
+    def widget(self):
+        """Return the file browser widget
+
+        :return: the file browser widget
+        :rtype: `ipywidgets.Accordion <https://ipywidgets.readthedocs.io/en/stable/examples/Widget%20List.html#Accordion-and-Tab-use-selected_index,-not-value>`_
+        """
+
+        return self._widget
+
+    def _onUpdate(self,change):
+        """A callable that is called when a new entry of the file browser is clicked
+
+        See `here <https://ipywidgets.readthedocs.io/en/stable/examples/Widget%20Events.html#Traitlet-events>`_ for more information
+        """
+
         if len(change['new']) > 0:
             self.refresh(change['new'][0])
 
-    def refresh(self,item):
-        path = os.path.abspath(os.path.join(self.cwd,item))
+    def update(self,item):
+        """Update the file browser widget with a new entry (file or directory name)
+
+        This will:
+
+        1. update the name of the current selection on top of the file browser widget
+        2. update the directory contents subwidget in case where the new entry is a directory
+
+        :param entry: the filename or directory name to update the file browser with
+        :type entry: str
+        """
+
+        path = os.path.abspath(os.path.join(self._cwd,item))
 
         if os.path.isfile(path):
-            if self.select_file:
-                self.widget.set_title(0,path)  
-                self.file = path
-                self.widget.selected_index = None
+            if self._selectFile:
+                self._widget.set_title(0,path)  
+                self._file = path
+                self._widget.selected_index = None
             else:
-                self.select.value = ()
-
-        else: # os.path.isdir(path)
-            self.file = None 
-            self.cwd  = path
+                self._select.value = ()
+        else: 
+            self._file = None 
+            self._cwd  = path
 
             # Build list of files and dirs
             keys = ['[..]']; 
@@ -66,7 +103,7 @@ class PathSelector(object):
                     vals.append(k)
 
             # Update widget
-            self.widget.set_title(0,path)  
-            self.select.options = list(zip(keys,vals)) 
-            with self.select.hold_trait_notifications():
-                self.select.value = ()
+            self._widget.set_title(0,path)  
+            self._select.options = list(zip(keys,vals)) 
+            with self._select.hold_trait_notifications():
+                self._select.value = ()
