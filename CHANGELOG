@@ -1,43 +1,49 @@
+version 0.6.1
+-------------
+* RENAMED **README.md** file to **README.tst**
+* CHANGED updated docstrings and rst files
+* CHANGED removed m2r dependencies in **conf.py** file
+
 version 0.6.0
---------------
+-------------
 * ADDED   troubleshootings section in the **README** file
 * ADDED   added docstrings
 * ADDED   sphinx build command in the setup process
 * CHANGED added __release__ variable to **__pkginfo__** file
 
 version 0.5.0
---------------
+-------------
 * FIXED   code block bad syntax in **README.md**
 * CHANGED added pypi packaging info to **setup.py** file  
 * ADDED   **LICENSE** file as a simple copy of **COPYING** file
 
 version 0.4.0
---------------
+-------------
 * CHANGED the name of the project in the **setup.py** file
 * ADDED   **requirements.txt** file for later installing the package through *pip* machinery
 * ADDED   dependencies in the **setup.py** file
 
 version 0.3.2
---------------
+-------------
 * CHANGED added informations in the **README** file
 
 version 0.3.1
---------------
+-------------
 * FIXED typos in the **README** file
 
 version 0.3.0
---------------
+-------------
 * CHANGED added informations in the **README** file
 * CHANGED added contents to **CONTRIBUTING** file
 
 version 0.2.0
---------------
+-------------
 * FIXED   typos due to files and classes renamings
 * CHANGED reorganized the files
 * CHANGED reorganized renamed some classes
 * CHANGED added informations in the **README** file
 
 version 0.1.0
---------------
+-------------
 * ADDED initial contents
 
