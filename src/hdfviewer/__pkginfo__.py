@@ -18,7 +18,7 @@ __status__ = "Prototype"
 
 __url__ = "https://code.ill.fr/panosc/data-analysis-services/hdf-data-viewer"
 
-__version__ = "0.6"
+__version__ = "0.7"
 
-__release__ = "0.6.2"
+__release__ = "0.7.0"
 
