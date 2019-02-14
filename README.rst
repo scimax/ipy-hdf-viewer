@@ -1,7 +1,9 @@
 Overview
 ========
-
 **hdfviewer** is a python3 package for inspecting HDF files in the context of **Jupyter Lab** notebook.
+
+.. overview-begin
+
 It represents each group found in the HDF file as an accordion made of the following subitems:
 
 - **attributes**: contains the HDF attributes of this group
@@ -30,12 +32,37 @@ In case of **2D** and **3D** datasets, the matrix view is made of a 2D image of 
   - go the +n (n can be > 9) frame by pressing *n* number followed by the **down** or the **right** keys 
   - go the -n (n can be > 9) frame by pressing *n* number followed by the **up** or the **left** keys 
 
+.. overview-end
+
+Usage in a notebook
+===================
+
+.. usage-begin
+
+.. code-block:: python
+   :caption: Usage in a notebook
+
+    %matplotlib ipympl
+
+    import h5py
+    from hdfviewer.widgets.HDFViewer import HDFViewer
+    from hdfviewer.widgets.PathSelector import PathSelector
+
+    path = PathSelector(extensions=[".hdf",".h5",".nxs"])
+    path.widget
+
+    if path.file:
+        hdf5 = h5py.File(path.file,"r")
+        display(HDFViewer(hdf5))
+
+.. usage-end
+
 Prerequesites
 =============
 - python3 + pip
 
 Installation
-=============
+============
 see [here](https://github.com/jupyter-widgets/ipywidgets/tree/master/packages/jupyterlab-manager) for complementary info
 
 - `cd` to the directory where lies the `setup.py` file
@@ -53,25 +80,5 @@ If none or only one of these extensions are mentionned, please run the following
 
 - `jupyter labextension install @jupyter-widgets/jupyterlab-manager`
 - `jupyter labextension install jupyter-matplotlib`
-
-Usage in a notebook
-===================
-```
-%matplotlib ipympl
-
-import h5py
-from hdfviewer.widgets.HDFViewer import HDFViewer
-from hdfviewer.widgets.PathSelector import PathSelector
-
-path = PathSelector(extensions=[".hdf",".h5",".nxs"])
-path.widget
-
-if path.file:
-    hdf5 = h5py.File(path.file,"r")
-    display(HDFViewer(hdf5))
-```
-
-
-
 
 

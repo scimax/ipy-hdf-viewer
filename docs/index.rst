@@ -3,7 +3,9 @@
 Welcome to hdfviewer's documentation!
 =====================================
 
-.. mdinclude:: ../README.md
+.. toctree::
+    
+   readme_link
 
 ================
 Package contents
