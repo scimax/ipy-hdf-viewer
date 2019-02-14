@@ -26,7 +26,7 @@ pkginfo["__classifiers__"] = ["Programming Language :: Python :: 3","License :: 
 
 pkginfo["__long_description_content_type__"] ="text/markdown"
 
-with open("README.md","r") as f:
+with open("README.rst","r") as f:
     pkginfo["__long_description__"] = f.read()
 
 packages = find_packages("src")
