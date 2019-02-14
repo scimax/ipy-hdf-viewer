@@ -41,10 +41,18 @@ see [here](https://github.com/jupyter-widgets/ipywidgets/tree/master/packages/ju
 - `cd` to the directory where lies the `setup.py` file
 - pip3 install --user .
 
-You may also need to install the following Jupyter Lab extensions:
+Troubleshootings
+================
 
-- jupyter labextension install @jupyter-widgets/jupyterlab-manager
-- jupyter labextension install jupyter-matplotlib
+You running the widget on JupyterLab you may have get some text describing the widget instead of the actual widget. This means that you may have to install 
+the `jupyterlab-manager` and `jupyter-matplotlib` extensions. To check this please run the following command:
+
+- `jupyter labextension list`
+
+If none or only one of these extensions are mentionned, please run the following commands to install the missing one(s):
+
+- `jupyter labextension install @jupyter-widgets/jupyterlab-manager`
+- `jupyter labextension install jupyter-matplotlib`
 
 Usage in a notebook
 ===================
