@@ -1,3 +1,10 @@
+version 0.6.0
+--------------
+* ADDED   troubleshootings section in the **README** file
+* ADDED   added docstrings
+* ADDED   sphinx build command in the setup process
+* CHANGED added __release__ variable to **__pkginfo__** file
+
 version 0.5.0
 --------------
 * FIXED   code block bad syntax in **README.md**
