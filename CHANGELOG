@@ -1,3 +1,7 @@
+version 0.6.2
+-------------
+* FIXED   read **README.rst** for setting the long description of the package instead of deleted **README.md**
+
 version 0.6.1
 -------------
 * RENAMED **README.md** file to **README.tst**
