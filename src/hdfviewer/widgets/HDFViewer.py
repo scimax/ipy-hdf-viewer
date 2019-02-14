@@ -70,7 +70,7 @@ class HDFViewer(widgets.Accordion):
         - for `str` input type, this will be the path to the HDF datafile
         - for `File`, this will be the output of a prior HDF file opening in read mode
         - for `bytes`, this will the byte representation of athe HDF data
-    :type hdf: str or bytes or h5py:File
+    :type hdf: str or bytes or :class:`h5py.File`
     :param startPath: the hdf path from where the HDF data will be inspected.
 
         If not set, the starting path will be the root of the HDF data
@@ -143,7 +143,7 @@ class HDFViewer(widgets.Accordion):
     def _onSelectDataset(self,change):
         """A callable that is called when a new dataset is selected
 
-        See `here <https://ipywidgets.readthedocs.io/en/stable/examples/Widget%20Events.html#Traitlet-events>`_ for more information
+        See `here <https://ipywidgets.readthedocs.io/en/stable/examples/Widget%20Events.html#Traitlet-events>`__ for more information
         """
                                 
         idx = change["new"]

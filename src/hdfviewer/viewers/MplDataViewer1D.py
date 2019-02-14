@@ -1,6 +1,5 @@
 """
-MatPlotLib based viewer for 1D NumPy data.
-
+MatPlotLib viewer for NumPy 1D NumPy data.
 """
 
 import numpy as np
@@ -8,6 +7,18 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 class _MplDataViewer1D(object):
+    """This class allows to display 1D NumPy array in a :class:`matplotlib.figure.Figure`
+
+    This will be a simple matplotlib plot.
+
+    :param dataset: the NumPy array to be displayed
+        
+        The dataset will be squeezed from any dimensions equal to 1
+    :type dataset: :class:`numpy.ndarray`
+
+    :param `kwargs`: the keyword arguments
+    :type `kwargs`: dict
+    """
     
     def __init__(self,dataset,**kwargs):
                             
@@ -21,28 +32,41 @@ class _MplDataViewer1D(object):
                    
     @property
     def figure(self):
+        """Getter for the figure to be displayed.
+
+        :return: returns the figure to be displayed in the jupyter output widget
+        :rtype: :class:`matplotlib.figure.Figure`
+        """
+
         return self._figure
         
     @property
     def dataset(self):
+        """Getter/setter for the dataset to be displayed.
+
+        :getter: returns the dataset to be displayed
+        :setter: sets the dataset to be displayed
+        :type: :class:`numpy.ndarray`
+        """
+
         return self._dataset
 
     @dataset.setter                
     def dataset(self,dataset):
-        """1D dataset setter
-        """
 
         self._dataset = dataset
                         
         self.update()
         
     def _initLayout(self):
-        """Initializes layout.
+        """Initializes the figure layout.
         """
 
         self._mainAxes = plt.subplot(111)
                             
     def update(self):
+        """Update the figure.
+        """
 
         self._mainAxes.plot(self._dataset[:])
 

@@ -1,6 +1,4 @@
-"""
-MatPlotLib based viewer for 2D NumPy data.
-
+"""MatPlotLib based viewer for 2D NumPy data.
 """
 
 import numpy as np
@@ -10,6 +8,26 @@ import matplotlib.pyplot as plt
 import matplotlib.widgets as widgets
 
 class _MplDataViewer2D(object):
+    """This class allows to display 2D NumPy array in a :class:`matplotlib.figure.Figure`
+
+    The figure is made of an central image surrounded on top by the column-view of the dataset and on the right by a row-view of the dataset
+    which depending on the plotting mode corresponds to:
+
+    - slices along the row and column of a selected pixel using left-click mouse button when the cross-plot mode is set
+    - integrations of the 2D image along the X and Y axis when the integration mode is set
+
+    The figure is interactive with the following interactions:
+
+    - toggle between cross and integration 1D potting mode. In cross plot mode, the 1D projection views represents resp. the row and column of the matrix image point left-clicked by the user. In integration plot mode, the 1D projection views represents the sum over resp. the row and column of the image. To switch between those two modes, press the **i** key.
+
+    :param dataset: the NumPy array to be displayed
+        
+        The dataset will be squeezed from any dimensions equal to 1
+    :type dataset: :class:`numpy.ndarray`
+
+    :param standAlone: if True a cursor will be displayed when hovering over the 2D view of the dataset
+    :type standAlone: bool
+    """
     
     def __init__(self,dataset,standAlone=True):
         
@@ -31,16 +49,27 @@ class _MplDataViewer2D(object):
                    
     @property
     def figure(self):
+        """Getter for the figure to be displayed.
+
+        :return: returns the figure to be displayed in the jupyter output widget
+        :rtype: :class:`matplotlib.figure.Figure`
+        """
+
         return self._figure
         
     @property
     def dataset(self):
+        """Getter/setter for the dataset to be displayed.
+
+        :getter: returns the dataset to be displayed
+        :setter: sets the dataset to be displayed
+        :type: :class:`numpy.ndarray`
+        """
+
         return self._dataset
 
     @dataset.setter
     def dataset(self,dataset):
-        """2D dataset setter
-        """
 
         self._dataset = dataset
                 
@@ -53,7 +82,12 @@ class _MplDataViewer2D(object):
         self._colSlice = slice(0,self._dataset.shape[1],None)
         
     def _onChangeAxesLimits(self,event):
-        """Update the cross plot according to the reduced row and/or column range
+        """Callback called when the axis of the matrix view have changed.
+
+        This will update the cross plot according to the reduced row and/or column range.
+
+        :param event: the axes whose axis have been changed
+        :type event: :class:`matplotlib.axes.SubplotBase`
         """
 
         self._rowSlice = slice(*sorted([int(v) for v in event.get_ylim()]))
@@ -68,7 +102,7 @@ class _MplDataViewer2D(object):
         self._updateCrossPlot()
 
     def _initActions(self):
-        """Init all the widgets actions.
+        """Setup all the actions and their corresponding callbacks.
         """
 
         self._buttonPressId = self._figure.canvas.mpl_connect('button_press_event', self._onSelectPixel)
@@ -77,11 +111,7 @@ class _MplDataViewer2D(object):
         self._mainAxes.callbacks.connect('ylim_changed', self._onChangeAxesLimits)
 
     def _initLayout(self):
-        """Initializes layout.
-           The figure is made of an central image surrounded on top by the column-view of the dataset and on the right by a row-view of the dataset
-           which depending on the plotting mode corresponds to:
-               - slices along the row and column of a selected pixel using left-click mouse button when the cross-plot mode is set
-               - integrations of the 2D image along the X and Y axis when the integration mode is set
+        """Initializes the figure layout.
         """
 
         grid = gridspec.GridSpec(3, 3, self._figure, width_ratios=[0.3, 4, 1], height_ratios=[1, 4, 0.3], wspace=0.3)
@@ -104,7 +134,10 @@ class _MplDataViewer2D(object):
         self._selectedPixel = (0,0)
         
     def _onKeyPress(self,event):
-        """Add keyboard interaction for navigating through the dataset
+        """Callback called when a keyboard key is pressed.
+
+        :param event: the keyboard keypress event
+        :type event: :class:`matplotlib.backend_bases.KeyEvent`
         """
 
         if event.key == "i":
@@ -113,7 +146,10 @@ class _MplDataViewer2D(object):
         self._updateCrossPlot()
 
     def _onSelectPixel(self,event):
-        """Update the cross plot according to the selected pixel of the 2D/3D image.
+        """Callback called when a mouse buttton is clicked.
+
+        :param event: the mouse click event
+        :type event: :class:`matplotlib.backend_bases.MouseEvent`
         """
 
         # Only left button click will produce a cross plot
@@ -126,8 +162,7 @@ class _MplDataViewer2D(object):
         self.selectPixel(int(event.ydata),int(event.xdata))
         
     def _updateCrossPlot(self):
-        """Update the cross plots for 2D/3D dataset.
-           Cross plots are 1D plots which correspond to the reduced view of 2D/3D datasets projected onto X and Y axis            
+        """Update the cross plots.
         """
          
         if self._xyIntegration:
@@ -155,7 +190,14 @@ class _MplDataViewer2D(object):
         plt.draw()
 
     def selectPixel(self,row,col):
-        """Select a pixel on the image and update the cross plots
+        """Select a pixel on the image.
+
+        This will update the croos plots.
+
+        :param row: the pixel row
+        :type column: int
+        :param row: the pixel column
+        :type column: int
         """
 
         self._selectedPixel = (row,col)
@@ -163,9 +205,10 @@ class _MplDataViewer2D(object):
         self._updateCrossPlot()
                             
     def setXYIntegrationMode(self,xyIntegration):
-        """Toggle the integration mode.
-           If True, the top and right 1D plots will be resp. the sum/integral over y and x axis
-           If False, the top and right 1D plots will be resp. the cross plots along corresonding to resp. y and x axis of the selected pixel
+        """Switch between slice plot mode and integration mode.
+
+        :param xyIntegration: if True, the croos plots will be resp. the integral over y and x axis otherwise the cross plots will be resp. slices along the selected pixel
+        :type xyIntegration: bool
         """
 
         self._xyIntegration = xyIntegration
@@ -177,6 +220,8 @@ class _MplDataViewer2D(object):
         self._updateCrossPlot()
 
     def update(self):
+        """Update the figure.
+        """
 
         # Remove the current image if any
         if self._image:
