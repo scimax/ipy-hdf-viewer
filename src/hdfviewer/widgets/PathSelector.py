@@ -22,21 +22,32 @@ class PathSelector(object):
     """
 
     def __init__(self,startDir=None,selectFile=True,extensions=None):        
-        self._file        = None 
+
+        self._file  = None 
         self._selectFile = selectFile
-        self._cwd         = startDir if startDir else os.environ["HOME"]
-        self._select      = widgets.SelectMultiple(options=['init'],value=(),rows=10,description='') 
-        self._widget      = widgets.Accordion(children=[self._select])        
+        self._startDir = startDir if startDir else os.environ["HOME"]
+        self._select = widgets.SelectMultiple(options=['init'],value=(),rows=10,description='') 
+        self._widget = widgets.Accordion(children=[self._select])        
         self._extensions = extensions if extensions else []
 
         # Start closed (showing path only)
         self._widget.selected_index = None
-        self.update(self._cwd)
-        self.select.observe(self._onUpdate,'value')
+        self.update(self._startDir)
+        self._select.observe(self._onUpdate,'value')
+
+    @property
+    def file(self):
+        """Return the path selected.
+
+        :return: the selected path
+        :rtype: str
+        """
+
+        return self._file
 
     @property
     def widget(self):
-        """Return the file browser widget
+        """Getter for the file browser widget
 
         :return: the file browser widget
         :rtype: `ipywidgets.Accordion <https://ipywidgets.readthedocs.io/en/stable/examples/Widget%20List.html#Accordion-and-Tab-use-selected_index,-not-value>`_
@@ -51,7 +62,7 @@ class PathSelector(object):
         """
 
         if len(change['new']) > 0:
-            self.refresh(change['new'][0])
+            self.update(change['new'][0])
 
     def update(self,item):
         """Update the file browser widget with a new entry (file or directory name)
@@ -65,7 +76,7 @@ class PathSelector(object):
         :type entry: str
         """
 
-        path = os.path.abspath(os.path.join(self._cwd,item))
+        path = os.path.abspath(os.path.join(self._startDir,item))
 
         if os.path.isfile(path):
             if self._selectFile:
@@ -76,7 +87,7 @@ class PathSelector(object):
                 self._select.value = ()
         else: 
             self._file = None 
-            self._cwd  = path
+            self._startDir  = path
 
             # Build list of files and dirs
             keys = ['[..]']; 
@@ -86,9 +97,9 @@ class PathSelector(object):
                 elif os.path.isdir(os.path.join(path,item)):
                     keys.append('['+item+']'); 
                 else:
-                    if self.extensions:
+                    if self._extensions:
                         ext = os.path.splitext(item)[-1]
-                        if ext in self.extensions:
+                        if ext in self._extensions:
                             keys.append(item); 
                     else:
                         keys.append(item); 

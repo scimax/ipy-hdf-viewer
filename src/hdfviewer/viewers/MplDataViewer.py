@@ -72,7 +72,7 @@ class MplDataViewer(object):
         if ndim not in _viewers:
             raise MplDataViewerError("The dataset dimension ({ndim:d}) is not supported by the viewer".format(ndim=ndim))
 
-        self._viewer = _viewers[ndim](self._dataset,standAlone)
+        self._viewer = _viewers[ndim](self._dataset,standAlone=standAlone)
                             
     @property
     def viewer(self):
