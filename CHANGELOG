@@ -1,3 +1,9 @@
+version 0.7.0
+-------------
+* ADDED     a class method to HDFViewer for opening the online documentation
+* CHANGED   updated the demo notebook accordingly
+* CHANGED   added release information to the main __init__
+
 version 0.6.2
 -------------
 * FIXED   read **README.rst** for setting the long description of the package instead of deleted **README.md**
