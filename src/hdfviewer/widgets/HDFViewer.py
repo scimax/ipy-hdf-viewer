@@ -1,5 +1,6 @@
 import io
 import os
+import webbrowser
 
 import numpy as np
 
@@ -9,8 +10,8 @@ import matplotlib.pyplot as plt
 
 import ipywidgets as widgets
 
+import hdfviewer
 from hdfviewer.viewers.MplDataViewer import MplDataViewer, MplDataViewerError
-
 from hdfviewer.widgets.MplOutput import MplOutput
 
 class HDFViewerError(Exception):
@@ -146,4 +147,13 @@ class HDFViewer(widgets.Accordion):
 
         hbox.children = [firstFrame,previousFrame,frame,nextFrame,lastFrame,plotMode]
         display(hbox)
+
+    @classmethod
+    def info(self):
+        """Open the url of the package documentation.
+        """
+
+        # This will open the package documentation stored on readthedocs
+        url = os.path.join("https://hdf-viewer.readthedocs.io/en/{0}".format(hdfviewer.__release__))
+        webbrowser.open(url)
 
