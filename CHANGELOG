@@ -1,3 +1,8 @@
+version 0.8.0
+-------------
+* ADDED     helper function to open the viewer with a button for opening the online documentation
+* CHANGED   the type of the input array is now checked
+
 version 0.7.0
 -------------
 * ADDED     a class method to HDFViewer for opening the online documentation
