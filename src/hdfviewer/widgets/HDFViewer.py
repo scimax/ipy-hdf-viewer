@@ -14,6 +14,18 @@ import hdfviewer
 from hdfviewer.viewers.MplDataViewer import MplDataViewer, MplDataViewerError
 from hdfviewer.widgets.MplOutput import MplOutput
 
+def HDFViewerWidget(hdf, startPath=None):
+
+    vbox = widgets.VBox()
+
+    button = widgets.Button(description="documentation", tooltip="open documentation for release {0}".format(hdfviewer.__release__))
+
+    button.on_click(HDFViewer.info)
+
+    vbox.children = [button,HDFViewer(hdf,startPath)]
+
+    return vbox
+
 class HDFViewerError(Exception):
     """:class:`HDFViewer` specific exception"""
 
