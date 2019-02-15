@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 
 import ipywidgets as widgets
 
-import hdfviewer
+from hdfviewer import __version__
 from hdfviewer.viewers.MplDataViewer import MplDataViewer, MplDataViewerError
 from hdfviewer.widgets.MplOutput import MplOutput
 
@@ -18,7 +18,7 @@ def HDFViewerWidget(hdf, startPath=None):
 
     vbox = widgets.VBox()
 
-    button = widgets.Button(description="documentation", tooltip="open documentation for release {0}".format(hdfviewer.__release__))
+    button = widgets.Button(description="documentation", tooltip="open documentation for release {0}".format(__version__))
 
     button.on_click(lambda event : HDFViewer.info())
 
@@ -149,7 +149,7 @@ class HDFViewer(widgets.Accordion):
                 output.figure = self._viewer.viewer.figure
 
     @staticmethod
-    def info(release=None):
+    def info(version=None):
         """Open the url of a given release of the package documentation.
 
         :param release: the release of the package.
@@ -158,9 +158,9 @@ class HDFViewer(widgets.Accordion):
         :type release: str
         """
 
-        release = release if release else hdfviewer.__release__
+        version = version if version else __version__
 
         # This will open the package documentation stored on readthedocs
-        url = os.path.join("https://hdf-viewer.readthedocs.io/en/{0}".format(release))
+        url = os.path.join("https://hdf-viewer.readthedocs.io/en/{0}".format(version))
         webbrowser.open(url)
 

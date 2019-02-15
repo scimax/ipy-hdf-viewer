@@ -18,7 +18,6 @@ else:
     command_options["build_sphinx"] = {}
     command_options["build_sphinx"]["project"] = ("setup.py",name)  
     command_options["build_sphinx"]["version"] = ("setup.py",pkginfo["__version__"])  
-    command_options["build_sphinx"]["release"] = ("setup.py",pkginfo["__release__"])  
     command_options["build_sphinx"]["source_dir"] = ('setup.py', 'docs')
     
 # Add additional information to pkginfo
