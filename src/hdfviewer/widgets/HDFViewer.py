@@ -138,7 +138,12 @@ class HDFViewer(widgets.Accordion):
 
     @staticmethod
     def info(release=None):
-        """Open the url of the package documentation.
+        """Open the url of a given release of the package documentation.
+
+        :param release: the release of the package.
+            
+            If None, the current release will be selected.
+        :type release: str
         """
 
         release = release if release else hdfviewer.__release__
