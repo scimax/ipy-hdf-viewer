@@ -20,5 +20,5 @@ __url__ = "https://code.ill.fr/panosc/data-analysis-services/hdf-data-viewer"
 
 __version__ = "0.8"
 
-__release__ = "0.8.0"
+__release__ = "0.8.1"
 
