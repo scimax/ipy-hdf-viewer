@@ -136,24 +136,14 @@ class HDFViewer(widgets.Accordion):
                 # Bind the DataViewer figure to the MplOutput widget for allowing a "clean" output clearing (i.e. release the figure from plt)
                 output.figure = self._viewer.viewer.figure
 
-        hbox = widgets.HBox()
-
-        firstFrame = widgets.Button(description="first frame")
-        previousFrame = widgets.Button(description="previous frame")
-        nextFrame = widgets.Button(description="next frame")
-        lastFrame = widgets.Button(description="last frame")
-        frame = widgets.IntSlider(value=5,min=0,max=10)
-        plotMode = widgets.Checkbox(value=False,description="xy integration")
-
-        hbox.children = [firstFrame,previousFrame,frame,nextFrame,lastFrame,plotMode]
-        display(hbox)
-
-    @classmethod
-    def info(self):
+    @staticmethod
+    def info(release=None):
         """Open the url of the package documentation.
         """
 
+        release = release if release else hdfviewer.__release__
+
         # This will open the package documentation stored on readthedocs
-        url = os.path.join("https://hdf-viewer.readthedocs.io/en/{0}".format(hdfviewer.__release__))
+        url = os.path.join("https://hdf-viewer.readthedocs.io/en/{0}".format(release))
         webbrowser.open(url)
 
