@@ -20,7 +20,7 @@ def HDFViewerWidget(hdf, startPath=None):
 
     button = widgets.Button(description="documentation", tooltip="open documentation for release {0}".format(hdfviewer.__release__))
 
-    button.on_click(HDFViewer.info)
+    button.on_click(lambda event : HDFViewer.info())
 
     vbox.children = [button,HDFViewer(hdf,startPath)]
 
