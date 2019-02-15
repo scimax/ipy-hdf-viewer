@@ -65,6 +65,10 @@ class MplDataViewer(object):
 
     def __init__(self,dataset,standAlone=True):
 
+        # The viewer only supports array with numeric types
+        if not np.issubdtype(dataset.dtype,np.number):
+            raise MplDataViewerError("The dataset type ({dtype}) is not numeric".format(dtype=dataset.dtype))
+            
         # Remove axis with that has dimension 1 (e.g. (20,1,30) --> (20,30))
         self._dataset = np.squeeze(dataset)
 
