@@ -1,3 +1,10 @@
+version 0.9.0
+-------------
+* ADDED     **.gitignore** file
+* ADDED     script for launching HDFViewer from command line
+* CHANGED   refactored HDFViewer class for supporting JSON file dumped with HDF data
+* CHANGED   refactored PathSelector class
+
 version 0.8.2
 -------------
 * CHANGED   removed __release__ variable updated code accordingly
