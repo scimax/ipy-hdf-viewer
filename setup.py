@@ -48,4 +48,5 @@ setup(name                          = name,
       install_requires              = ["numpy","matplotlib","h5py","jupyterlab","ipywidgets","ipympl"],
       cmdclass                      = cmdclass,
       command_options               = command_options,
+      scripts                       = ["scripts/run_hdfviewer"]
 )

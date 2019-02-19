@@ -1,0 +1,34 @@
+#!/usr/bin/env python3
+
+import nbformat
+import os
+import subprocess
+import sys
+import tempfile
+
+if __name__ == "__main__":
+
+    if len(sys.argv) != 2:
+        print("Invalid number of arguments")
+        sys.exit(1)
+
+    filename = sys.argv[1]
+    if not os.path.isfile(filename):
+        print("The file {!r} does not exist".format(filename))
+        sys.exit(1)
+
+    cells = []
+    cells.append("%matplotlib ipympl")
+    cells.append("""from hdfviewer.widgets.HDFViewer import HDFViewerWidget""")
+    cells.append("""widget = HDFViewerWidget({!r})
+display(widget)""".format(filename))
+
+    notebook = nbformat.v4.new_notebook(metadata={'language': 'python',})
+    notebook["cells"] = [nbformat.v4.new_code_cell(cell) for cell in cells]
+
+    notebookFilename = tempfile.mktemp(suffix=".ipynb")
+    with open(notebookFilename,"w") as f:
+        nbformat.write(notebook, f, 4)
+
+    subprocess.Popen(["jupyter-lab",notebookFilename])
+
