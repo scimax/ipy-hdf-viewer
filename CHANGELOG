@@ -1,3 +1,9 @@
+version 0.10.0
+-------------
+* ADDED     PanOSC, ILL and EC logos to the documentation
+* CHANGED   extended the footer layout of the documentation
+* FIXED     ill-formed docstrings
+
 version 0.9.0
 -------------
 * ADDED     **.gitignore** file
