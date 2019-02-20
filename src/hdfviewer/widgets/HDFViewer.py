@@ -35,8 +35,8 @@ def _openHDFFile(filename):
     :type hdfSource: str
 
     The file can be a path to a *true* HDF file or to a file in which the HDF contents has been dumped into.
-    :raises: :class:`TypeError`: if the input is not a str
-    :raises: :class:`IOError`: if the path is not valid or could not be opened through h5py API
+    :raises: :class:`TypeError` if the input is not a str
+    :raises: :class:`IOError` if the path is not valid or could not be opened through :mod:`h5py` API
     """
 
     hdf = None
@@ -178,8 +178,10 @@ class HDFViewer(widgets.Accordion):
     def _onSelectDataset(self, change):
         """A callable that is called when a new dataset is selected
 
-        #Traitlet-events>`__ for more information
-        See `here <https://ipywidgets.readthedocs.io/en/stable/examples/Widget%20Events.html
+        See `here <https://ipywidgets.readthedocs.io/en/stable/examples/Widget%20Events.html#Traitlet-events>`__ for more information
+
+        :param change: the state of the traits holder
+        :type change: dict
         """
 
         idx = change["new"]

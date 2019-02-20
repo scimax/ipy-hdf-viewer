@@ -56,8 +56,7 @@ class PathSelector(object):
         """Getter for the file browser widget
 
         :return: the file browser widget
-        # Accordion-and-Tab-use-selected_index,-not-value>`_
-        :rtype: `ipywidgets.Accordion <https://ipywidgets.readthedocs.io/en/stable/examples/Widget%20List.html
+        :rtype: `ipywidgets.Accordion <https://ipywidgets.readthedocs.io/en/stable/examples/Widget%20List.html# Accordion-and-Tab-use-selected_index,-not-value>`_
         """
 
         return self._widget
@@ -65,8 +64,10 @@ class PathSelector(object):
     def _onUpdate(self, change):
         """A callable that is called when a new entry of the file browser is clicked
 
-        # Traitlet-events>`_ for more information
-        See `here <https://ipywidgets.readthedocs.io/en/stable/examples/Widget%20Events.html
+        See `here <https://ipywidgets.readthedocs.io/en/stable/examples/Widget%20Events.html# Traitlet-events>`__ for more information
+
+        :param change: the state of the traits holder
+        :type change: dict
         """
 
         if len(change['new']) > 0:
