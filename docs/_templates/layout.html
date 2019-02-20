@@ -1,0 +1,26 @@
+{% extends '!layout.html' %}
+
+{% block footer %}
+<style>
+.footerlogos img {
+    padding: 8px 20px;
+    height: 64px;
+}
+</style>
+<center>
+    <div style="padding:10px">
+    This project has received funding from the European Union's <a href="https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/programmes/h2020" target="_blank">Horizon 2020</a> research and innovation programme under grant agreement <a href="https://cordis.europa.eu/project/rcn/219175/factsheet/en" target="_blank">No 823852</a>
+    </div>
+    <div class="footerlogos">
+    <a href="https://panosc-eu.github.io/" target="_blank">
+        <img src="_static/panosc_logo.png" alt="PanOSC logo icon"></img>
+    </a>
+    <a href="https://ec.europa.eu/commission/index_en" target="_blank">
+    <img src="_static/ec_logo.jpg" alt="European comission logo icon"></img>
+    </a>
+    <a href="https://www.ill.eu/" target="_blank">
+        <img src="_static/ill_logo.png" alt="ILL logo icon"></img>
+    </a>
+    </div>
+</center>
+{% endblock %}
