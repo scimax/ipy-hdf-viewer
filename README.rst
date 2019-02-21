@@ -63,7 +63,7 @@ Prerequesites
 
 Installation
 ============
-see [here](https://github.com/jupyter-widgets/ipywidgets/tree/master/packages/jupyterlab-manager) for complementary info
+see `here <https://github.com/jupyter-widgets/ipywidgets/tree/master/packages/jupyterlab-manager>`_ for complementary info
 
 - `cd` to the directory where lies the `setup.py` file
 - pip3 install --user .
