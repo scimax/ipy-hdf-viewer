@@ -132,7 +132,7 @@ class HDFViewer(widgets.Accordion):
             attributesAccordion = widgets.Accordion()
             for idx, (key, value) in enumerate(self._hdf[self._startPath].attrs.items()):
                 attributesAccordion.children = list(
-                    attributesAccordion.children) + [widgets.HTML(value)]
+                    attributesAccordion.children) + [widgets.HTML(str(value))]
                 attributesAccordion.set_title(idx, key)
 
             # Setup the groups and datasets accordion
