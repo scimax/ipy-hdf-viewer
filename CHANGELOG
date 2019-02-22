@@ -1,3 +1,7 @@
+version 0.10.2
+-------------
+* FIXED     error when when writing HDF attributes to ipywidgets HTML widget
+
 version 0.10.1
 -------------
 * FIXED     typo when detting url in **README** file
