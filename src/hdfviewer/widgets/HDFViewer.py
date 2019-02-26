@@ -152,6 +152,8 @@ class HDFViewer(widgets.Accordion):
                     datasetInfo.append("<i>Reduced dimension: %s</i>" %
                                        str(tuple([s for s in shape if s != 1])))
                     datasetInfo.append("<i>Type: %s</i>" % value.dtype.name)
+                    for item in self._hdf[self._startPath].attrs.items():
+                        datasetInfo.append("<i>%s: %s</i>" % item)
                     datasetInfo = "<br>".join(datasetInfo)
                     vbox = widgets.VBox()
                     vbox.children = [widgets.HTML(datasetInfo), MplOutput()]
